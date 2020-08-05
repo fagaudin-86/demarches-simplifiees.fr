@@ -1,11 +1,11 @@
-class ApiEntreprise::Job < ApplicationJob
+class APIEntreprise::Job < ApplicationJob
   DEFAULT_MAX_ATTEMPTS_API_ENTREPRISE_JOBS = 5
 
-  rescue_from(ApiEntreprise::API::ResourceNotFound) do |exception|
+  rescue_from(APIEntreprise::API::ResourceNotFound) do |exception|
     error(self, exception)
   end
 
-  rescue_from(ApiEntreprise::API::BadFormatRequest) do |exception|
+  rescue_from(APIEntreprise::API::BadFormatRequest) do |exception|
     error(self, exception)
   end
 

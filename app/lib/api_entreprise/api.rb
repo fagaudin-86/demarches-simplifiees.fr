@@ -1,4 +1,4 @@
-class ApiEntreprise::API
+class APIEntreprise::API
   ENTREPRISE_RESOURCE_NAME = "entreprises"
   ETABLISSEMENT_RESOURCE_NAME = "etablissements"
   EXERCICES_RESOURCE_NAME = "exercices"
@@ -63,7 +63,7 @@ class ApiEntreprise::API
   private
 
   def self.call(resource_name, siret_or_siren, procedure_id, user_id = nil)
-    return if ApiEntrepriseToken.new(token_for_procedure(procedure_id)).expired?
+    return if APIEntrepriseToken.new(token_for_procedure(procedure_id)).expired?
     url = url(resource_name, siret_or_siren)
     params = params(siret_or_siren, procedure_id, user_id)
 

@@ -1,4 +1,4 @@
-describe ApiEntreprise::API do
+describe APIEntreprise::API do
   let(:procedure) { create(:procedure) }
   let(:procedure_id) { procedure.id }
   let(:token) { Rails.application.secrets.api_entreprise[:key] }
@@ -9,7 +9,7 @@ describe ApiEntreprise::API do
     before do
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/entreprises\/#{siren}?.*token=#{token}/)
         .to_return(status: status, body: body)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
     end
 
     context 'when the service is unavailable' do
@@ -17,8 +17,8 @@ describe ApiEntreprise::API do
       let(:status) { 502 }
       let(:body) { File.read('spec/fixtures/files/api_entreprise/entreprises_unavailable.json') }
 
-      it 'raises ApiEntreprise::API::RequestFailed' do
-        expect { subject }.to raise_error(ApiEntreprise::API::RequestFailed)
+      it 'raises APIEntreprise::API::RequestFailed' do
+        expect { subject }.to raise_error(APIEntreprise::API::RequestFailed)
       end
     end
 
@@ -27,8 +27,8 @@ describe ApiEntreprise::API do
       let(:status) { 404 }
       let(:body) { File.read('spec/fixtures/files/api_entreprise/entreprises_not_found.json') }
 
-      it 'raises ApiEntreprise::API::ResourceNotFound' do
-        expect { subject }.to raise_error(ApiEntreprise::API::ResourceNotFound)
+      it 'raises APIEntreprise::API::ResourceNotFound' do
+        expect { subject }.to raise_error(APIEntreprise::API::ResourceNotFound)
       end
     end
 
@@ -37,8 +37,8 @@ describe ApiEntreprise::API do
       let(:status) { 400 }
       let(:body) { File.read('spec/fixtures/files/api_entreprise/entreprises_not_found.json') }
 
-      it 'raises ApiEntreprise::API::BadFormatRequest' do
-        expect { subject }.to raise_error(ApiEntreprise::API::BadFormatRequest)
+      it 'raises APIEntreprise::API::BadFormatRequest' do
+        expect { subject }.to raise_error(APIEntreprise::API::BadFormatRequest)
       end
     end
 
@@ -47,8 +47,8 @@ describe ApiEntreprise::API do
       let(:status) { 403 }
       let(:body) { File.read('spec/fixtures/files/api_entreprise/entreprises_private.json') }
 
-      it 'raises ApiEntreprise::API::ResourceNotFound' do
-        expect { subject }.to raise_error(ApiEntreprise::API::ResourceNotFound)
+      it 'raises APIEntreprise::API::ResourceNotFound' do
+        expect { subject }.to raise_error(APIEntreprise::API::ResourceNotFound)
       end
     end
 
@@ -89,7 +89,7 @@ describe ApiEntreprise::API do
     before do
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/etablissements\/#{siret}?.*non_diffusables=true&.*token=/)
         .to_return(status: status, body: body)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
     end
 
     context 'when siret does not exist' do
@@ -97,8 +97,8 @@ describe ApiEntreprise::API do
       let(:status) { 404 }
       let(:body) { '' }
 
-      it 'raises ApiEntreprise::API::ResourceNotFound' do
-        expect { subject }.to raise_error(ApiEntreprise::API::ResourceNotFound)
+      it 'raises APIEntreprise::API::ResourceNotFound' do
+        expect { subject }.to raise_error(APIEntreprise::API::ResourceNotFound)
       end
     end
 
@@ -117,7 +117,7 @@ describe ApiEntreprise::API do
     before do
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/exercices\/.*token=/)
         .to_return(status: status, body: body)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
     end
 
     context 'when siret does not exist' do
@@ -127,8 +127,8 @@ describe ApiEntreprise::API do
       let(:status) { 404 }
       let(:body) { '' }
 
-      it 'raises ApiEntreprise::API::ResourceNotFound' do
-        expect { subject }.to raise_error(ApiEntreprise::API::ResourceNotFound)
+      it 'raises APIEntreprise::API::ResourceNotFound' do
+        expect { subject }.to raise_error(APIEntreprise::API::ResourceNotFound)
       end
     end
 
@@ -149,7 +149,7 @@ describe ApiEntreprise::API do
     before do
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/associations\/.*token=/)
         .to_return(status: status, body: body)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
     end
 
     subject { described_class.rna(siren, procedure_id) }
@@ -159,8 +159,8 @@ describe ApiEntreprise::API do
       let(:status) { 404 }
       let(:body) { '' }
 
-      it 'raises ApiEntreprise::API::ResourceNotFound' do
-        expect { subject }.to raise_error(ApiEntreprise::API::ResourceNotFound)
+      it 'raises APIEntreprise::API::ResourceNotFound' do
+        expect { subject }.to raise_error(APIEntreprise::API::ResourceNotFound)
       end
     end
 
@@ -180,8 +180,8 @@ describe ApiEntreprise::API do
     let(:body) { File.read('spec/fixtures/files/api_entreprise/attestation_sociale.json') }
 
     before do
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:roles).and_return(roles)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:roles).and_return(roles)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/attestations_sociales_acoss\/#{siren}?.*token=/)
         .to_return(body: body, status: status)
     end
@@ -209,8 +209,8 @@ describe ApiEntreprise::API do
     let(:body) { File.read('spec/fixtures/files/api_entreprise/attestation_fiscale.json') }
 
     before do
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:roles).and_return(roles)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:roles).and_return(roles)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/attestations_fiscales_dgfip\/#{siren}?.*token=#{token}&user_id=#{user_id}/)
         .to_return(body: body, status: status)
     end
@@ -237,8 +237,8 @@ describe ApiEntreprise::API do
     let(:body) { File.read('spec/fixtures/files/api_entreprise/bilans_entreprise_bdf.json') }
 
     before do
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:roles).and_return(roles)
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(false)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:roles).and_return(roles)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(false)
       stub_request(:get, /https:\/\/entreprise.api.gouv.fr\/v2\/bilans_entreprises_bdf\/#{siren}?.*token=#{token}/)
         .to_return(body: body, status: status)
     end
@@ -263,7 +263,7 @@ describe ApiEntreprise::API do
     subject { described_class.entreprise(siren, procedure_id) }
 
     before do
-      allow_any_instance_of(ApiEntrepriseToken).to receive(:expired?).and_return(true)
+      allow_any_instance_of(APIEntrepriseToken).to receive(:expired?).and_return(true)
     end
 
     it 'makes no call to api-entreprise' do
