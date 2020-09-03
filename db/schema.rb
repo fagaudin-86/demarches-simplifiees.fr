@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_153016) do
+ActiveRecord::Schema.define(version: 2020_09_03_133655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.index ["parent_id"], name: "index_champs_on_parent_id"
     t.index ["private"], name: "index_champs_on_private"
     t.index ["row"], name: "index_champs_on_row"
+    t.index ["type_de_champ_id", "dossier_id", "row"], name: "index_champs_on_type_de_champ_id_and_dossier_id_and_row", unique: true
     t.index ["type_de_champ_id"], name: "index_champs_on_type_de_champ_id"
   end
 
@@ -217,6 +218,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reason"
+    t.index ["dossier_id"], name: "index_deleted_dossiers_on_dossier_id", unique: true
     t.index ["procedure_id"], name: "index_deleted_dossiers_on_procedure_id"
   end
 
@@ -324,7 +326,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.jsonb "entreprise_bilans_bdf"
     t.string "entreprise_bilans_bdf_monnaie"
     t.string "enseigne"
-    t.index ["dossier_id"], name: "index_etablissements_on_dossier_id"
+    t.index ["dossier_id"], name: "index_etablissements_on_dossier_id", unique: true
   end
 
   create_table "exercices", id: :serial, force: :cascade do |t|
@@ -433,7 +435,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "birthdate"
-    t.index ["dossier_id"], name: "index_individuals_on_dossier_id"
+    t.index ["dossier_id"], name: "index_individuals_on_dossier_id", unique: true
   end
 
   create_table "initiated_mails", id: :serial, force: :cascade do |t|
@@ -460,6 +462,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "message"
+    t.index ["email", "dossier_id"], name: "index_invites_on_email_and_dossier_id", unique: true
   end
 
   create_table "module_api_cartos", id: :serial, force: :cascade do |t|
@@ -547,6 +550,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_153016) do
     t.index ["draft_revision_id"], name: "index_procedures_on_draft_revision_id"
     t.index ["hidden_at"], name: "index_procedures_on_hidden_at"
     t.index ["parent_procedure_id"], name: "index_procedures_on_parent_procedure_id"
+    t.index ["path", "closed_at", "hidden_at", "unpublished_at"], name: "path_uniqueness", unique: true
     t.index ["path", "closed_at", "hidden_at"], name: "index_procedures_on_path_and_closed_at_and_hidden_at", unique: true
     t.index ["published_revision_id"], name: "index_procedures_on_published_revision_id"
     t.index ["service_id"], name: "index_procedures_on_service_id"
