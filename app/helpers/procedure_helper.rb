@@ -14,6 +14,12 @@ module ProcedureHelper
   end
 
   def procedure_modal_text(procedure, key)
+    # i18n-tasks-use t('modal.publish.body.publish') # let i18n-tasks know the key is used
+    # i18n-tasks-use t('modal.publish.body.reopen')
+    # i18n-tasks-use t('modal.publish.submit.publish')
+    # i18n-tasks-use t('modal.publish.submit.reopen')
+    # i18n-tasks-use t('modal.publish.title.publish')
+    # i18n-tasks-use t('modal.publish.title.reopen')
     action = procedure.close? ? :reopen : :publish
     t(action, scope: [:modal, :publish, key])
   end

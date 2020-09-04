@@ -20,6 +20,7 @@ class Champs::IntegerNumberChamp < Champ
     allow_nil: true,
     allow_blank: true,
     message: -> (object, _data) {
+      # i18n-tasks-use t('errors.messages.not_an_integer') # let i18n-tasks know the key is used
       "« #{object.libelle} » " + object.errors.generate_message(:value, :not_an_integer)
     }
   }
