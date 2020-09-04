@@ -42,6 +42,7 @@ gem 'groupdate'
 gem 'haml-rails'
 gem 'hashie'
 gem 'http_accept_language'
+gem 'i18n-tasks', '~> 0.9.31'
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'jwt'
 gem 'kaminari', '1.2.1' # Pagination
@@ -61,7 +62,7 @@ gem 'pundit'
 gem 'rack-attack'
 gem 'rack-mini-profiler'
 gem 'rails', '6.0.3.2'
-gem 'rails-i18n' # Locales par défaut
+gem 'rails-i18n', '~> 6.0.0' # Locales par défaut
 gem 'rake-progressbar', require: false
 gem 'react-rails'
 gem 'rgeo-geojson'

@@ -328,6 +328,7 @@ GEM
       sysexits (~> 1.1)
     hashdiff (1.0.1)
     hashie (4.1.0)
+    highline (2.0.3)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -342,6 +343,16 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
+    i18n-tasks (0.9.31)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 2.0.0)
+      i18n
+      parser (>= 2.2.3.0)
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      terminal-table (>= 1.5.1)
     ice_nine (0.11.2)
     ipaddress (0.8.3)
     jaro_winkler (1.5.4)
@@ -692,6 +703,8 @@ GEM
       httpclient (>= 2.4)
     sysexits (1.2.0)
     temple (0.8.2)
+    terminal-table (1.8.0)
+      unicode-display_width (~> 1.1, >= 1.1.1)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -815,6 +828,7 @@ DEPENDENCIES
   haml-rails
   hashie
   http_accept_language
+  i18n-tasks (~> 0.9.31)
   jquery-rails
   jwt
   kaminari (= 1.2.1)
@@ -840,7 +854,7 @@ DEPENDENCIES
   rails (= 6.0.3.2)
   rails-controller-testing
   rails-erd
-  rails-i18n
+  rails-i18n (~> 6.0.0)
   rake-progressbar
   react-rails
   rgeo-geojson
