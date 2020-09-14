@@ -25,27 +25,27 @@
         = label_tag :type do
           = t('your_question', scope: [:support, :question])
           %span.mandatory *
-        = select_tag :type, options_for_select(@options, params[:type]), include_blank: t('choose_question', scope: [:support, :question]), required: true
+        = select_tag :type, options_for_select(@options, params[:type]), include_blank: t('choose_question', scope: [:support, :question]), required: true, 'aria-role': 'list'
 
-      .support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_INFO } }
+      #procedure_info.support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_INFO } }
         .card-title
           = t('our_answer', scope: [:support, :response])
         .card-content
           = t('procedure_info_html', scope: [:support, :response], link_procedure_info: FAQ_CONTACTER_SERVICE_EN_CHARGE_URL)
 
-      .support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_PERDU } }
+      #lost_user.support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_PERDU } }
         .card-title
           = t('our_answer', scope: [:support, :response])
         .card-content
           = t('lost_user_html', scope: [:support, :response], base_url: APPLICATION_BASE_URL, link_lost_user: LISTE_DES_DEMARCHES_URL)
 
-      .support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_INSTRUCTION } }
+      #instruction_info.support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_INSTRUCTION } }
         .card-title
           = t('our_answer', scope: [:support, :response])
         .card-content
           = t('instruction_info_html', scope: [:support, :response], link_instruction: FAQ_OU_EN_EST_MON_DOSSIER_URL)
 
-      .support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_AMELIORATION } }
+      #product.support.card.featured.hidden{ data: { 'contact-type-only': Helpscout::FormAdapter::TYPE_AMELIORATION } }
         .card-title
           = t('our_answer', scope: [:support, :response])
         .card-content

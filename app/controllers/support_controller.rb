@@ -38,7 +38,9 @@ class SupportController < ApplicationController
   def setup_context
     @dossier_id = dossier&.id
     @tags = tags
-    @options = Helpscout::FormAdapter.options
+    @options = Helpscout::FormAdapter.options.map do |option|
+      option << { 'aria-role': 'listitem', 'aria-expanded': 'false', 'aria-controls': option[1] }
+    end
   end
 
   def setup_context_admin

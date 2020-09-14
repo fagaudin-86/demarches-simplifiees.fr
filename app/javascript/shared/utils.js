@@ -13,6 +13,13 @@ export function hide(el) {
   el && el.classList.add('hidden');
 }
 
+export function expand(el) {
+  el && el.setAttribute('aria-expanded', true);
+}
+
+export function unexpand(el) {
+  el && el.setAttribute('aria-expanded', false);
+}
 export function toggle(el, force) {
   if (force == undefined) {
     el & el.classList.toggle('hidden');
