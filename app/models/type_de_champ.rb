@@ -47,7 +47,8 @@ class TypeDeChamp < ApplicationRecord
     piece_justificative: 'piece_justificative',
     siret: 'siret',
     carte: 'carte',
-    repetition: 'repetition'
+    repetition: 'repetition',
+    titre_identite: 'titre_identite'
   }
 
   belongs_to :revision, class_name: 'ProcedureRevision', optional: true
